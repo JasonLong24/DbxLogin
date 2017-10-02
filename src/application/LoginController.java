@@ -5,6 +5,9 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.prefs.Preferences;
 
+import com.dropbox.core.DbxException;
+import com.dropbox.core.v2.files.DownloadErrorException;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,6 +15,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -22,10 +26,16 @@ public class LoginController implements Initializable {
 	private TextField getUsername;
 	@FXML
 	private PasswordField getPassword;
+	@FXML
+	private Label userLbl;
+	@FXML
+	private Label passLbl;
 	
 	@FXML
-	public void onLogin(ActionEvent e) {
+	public void onLogin(ActionEvent e) throws DownloadErrorException, DbxException, IOException {
+		DbxServer.filesDownload(getUsername.getText());
 		checkFiles();
+
 	}
 	
 	@FXML
@@ -49,8 +59,10 @@ public class LoginController implements Initializable {
 		
 		if (xmlUser.equals(getUsername.getText())) {
 			System.out.print("Username Correct");
+			userLbl.setVisible(true);
 			if (xmlPass.equals(getPassword.getText())) {
 				System.out.println("Password Correct");
+				passLbl.setVisible(true);
 			}
 		}
 }

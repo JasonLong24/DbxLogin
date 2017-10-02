@@ -9,11 +9,19 @@ import java.util.concurrent.TimeUnit;
 import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
 
+import com.dropbox.core.DbxException;
+import com.dropbox.core.v2.files.UploadErrorException;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 public class RegisterController implements Initializable{
 
@@ -25,11 +33,21 @@ public class RegisterController implements Initializable{
 	private PasswordField regPassChk;
 	
 	@FXML
-	public void onRegister(ActionEvent e) throws IOException, InterruptedException {
+	public void onRegister(ActionEvent e) throws IOException, InterruptedException, UploadErrorException, DbxException {
 		
 		makeFiles();
 		TimeUnit.SECONDS.sleep(1);
 		pushValues();
+		DbxServer.filesUpload(regUser.getText());
+		
+			Parent Parent = FXMLLoader.load(getClass().getResource("login.fxml"));
+			Stage stage = new Stage();
+			stage.setScene(new Scene(Parent));
+			stage.setResizable(false);
+			stage.alwaysOnTopProperty();
+			stage.show();
+			
+			((Node) (e.getSource())).getScene().getWindow().hide();
 	}
 	
 	public void makeFiles() throws IOException {

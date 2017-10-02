@@ -6,8 +6,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111" fx:controller="application.LoginController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: grey;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.LoginController">
    <children>
       <Label layoutX="104.0" layoutY="87.0" text="Username:" />
       <Label layoutX="104.0" layoutY="200.0" text="Password:" />
@@ -15,5 +14,7 @@
       <PasswordField fx:id="getPassword" layoutX="221.0" layoutY="195.0" />
       <Button layoutX="269.0" layoutY="307.0" mnemonicParsing="false" onAction="#onLogin" text="Login" />
       <Button layoutX="353.0" layoutY="307.0" mnemonicParsing="false" onAction="#onRegister" text="Register" />
+      <Label fx:id="passLbl" layoutX="390.0" layoutY="261.0" text="Password Correct" visible="false" />
+      <Label fx:id="userLbl" layoutX="203.0" layoutY="261.0" text="Username Correct" visible="false" />
    </children>
 </AnchorPane>
